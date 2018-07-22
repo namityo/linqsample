@@ -12,28 +12,29 @@ namespace TestLinqSharp
         {
             // Data1 の LINQ
             var data1List = GenerateData1();
-            var query = BuildQuery1(data1List);
+            var query = BuildQuery4(data1List);
             PrintData1(query);
 
             // Data2 の LINQ
             //var data2List = GenerateData2();
-            //var query2 = from data2 in data2List
-            //             from client in data2.Clients
-            //             where client.Contains("ー")
-            //             select client;
+            //var query2 = data2List
+            //    .SelectMany(data2 => data2.Clients)
+            //    .Where(client => client.Contains("ー"));
             //Console.WriteLine(String.Join(", ", query2));
 
-            //// Data2 と結合
+            // Data2 と結合
             //var data2List = GenerateData2();
-            //var query2 = from data1 in data1List
-            //             join data2 in data2List on data1.GroupId equals data2.GroupId
-            //             select new
-            //             {
-            //                 Group = data1.Group,
-            //                 Address = data2.Address,
-            //                 Name = data1.Name,
-            //                 Age = data1.Age
-            //             };
+            //var query2 = data1List.Join(
+            //    data2List,
+            //    data1 => data1.GroupId,
+            //    data2 => data2.GroupId,
+            //    (data1, data2) => new
+            //    {
+            //        Group = data1.Group,
+            //        Address = data2.Address,
+            //        Name = data1.Name,
+            //        Age = data1.Age,
+            //    });
             //foreach (var data in query2)
             //{
             //    Console.WriteLine(
@@ -77,30 +78,24 @@ namespace TestLinqSharp
 
         static IEnumerable<Data1> BuildQuery1(IEnumerable<Data1> data1s)
         {
-            return from data1 in data1s
-                   where data1.Group.Equals("総務")
-                   select data1;
+            return data1s.Where(data1 => data1.Group.Equals("総務"));
         }
 
         static IEnumerable<Data1> BuildQuery2(IEnumerable<Data1> data1s)
         {
-            return from data1 in data1s
-                   orderby data1.Age
-                   select data1;
+            return data1s.OrderBy(data1 => data1.Age);
         }
 
         static IEnumerable<IGrouping<int, Data1>> BuildQuery3(IEnumerable<Data1> data1s)
         {
-            return from data1 in data1s
-                   group data1 by data1.GroupId;
+            return data1s.GroupBy(data1 => data1.GroupId);
         }
 
         static IEnumerable<IGrouping<int, Data1>> BuildQuery4(IEnumerable<Data1> data1s)
         {
-            return from data1 in data1s
-                   group data1 by data1.GroupId into newGroup
-                   orderby newGroup.Key descending
-                   select newGroup;
+            return data1s
+                .GroupBy(data1 => data1.GroupId)
+                .OrderByDescending(group => group.Key);
         }
 
         static public List<Data2> GenerateData2()

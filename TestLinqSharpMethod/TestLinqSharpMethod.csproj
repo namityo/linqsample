@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BAB609CA-5B37-4FC5-A884-6520BC1E18D2}</ProjectGuid>
+    <ProjectGuid>{94E5580D-2448-4B9D-A924-7456A7CBCD25}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TestLinqSharp</RootNamespace>
-    <AssemblyName>TestLinqSharp</AssemblyName>
+    <RootNamespace>TestLinqSharpMethod</RootNamespace>
+    <AssemblyName>TestLinqSharpMethod</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
